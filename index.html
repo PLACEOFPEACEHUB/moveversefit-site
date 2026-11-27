@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOVEVERSE | The World of Movement</title>
+<meta name="description" content="MOVEVERSE is the World of Movement. One VR world for fitness, sports, physical education, play and wellness, with the MOVE AI COACH, MOVEVERSE Academy for schools, and one account across the website and the game. Now in development. Join early access.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20240%20240%22%20role%3D%22img%22%20aria-label%3D%22MoveVerse%20Orbit%20Mark%20symbol%22%3E%0A%20%20%3Ctitle%3EMoveVerse%20Orbit%20Mark%3C%2Ftitle%3E%0A%20%20%3C%21--%20Orbit%20ring%3A%20Pulse%20Cyan%20ellipse%2C%20rotated%20-22%20degrees%2C%20behind%20the%20M%20--%3E%0A%20%20%3Cellipse%20cx%3D%22120%22%20cy%3D%22120%22%20rx%3D%22102%22%20ry%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22%2300E5FF%22%20stroke-width%3D%2214%22%20transform%3D%22rotate%28-22%20120%20120%29%22%2F%3E%0A%20%20%3C%21--%20Letter%20M%3A%20single%20geometric%20path%2C%20flat%20stems%2C%20rising%20central%20vertex%20--%3E%0A%20%20%3Cpath%20d%3D%22M60%20180%20L60%2060%20L84%2060%20L120%20116%20L156%2060%20L180%2060%20L180%20180%20L156%20180%20L156%20104%20L120%20156%20L84%20104%20L84%20180%20Z%22%20fill%3D%22%23F4F7FB%22%2F%3E%0A%20%20%3C%21--%20Orbit%20point%3A%20a%20moving%20body%20on%20the%20orbit%20path%2C%20upper%20right%2C%20in%20Volt%20--%3E%0A%20%20%3Ccircle%20cx%3D%22169%22%20cy%3D%2267%22%20r%3D%2213%22%20fill%3D%22%23C8FF2E%22%2F%3E%0A%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.className += ' js';</script>
+<style>
+:root{
+  --black:#06080D;
+  --navy:#0D1526;
+  --navy-deep:#0A1120;
+  --navy-lift:#111C33;
+  --cyan:#00E5FF;
+  --volt:#C8FF2E;
+  --coral:#FF5C39;
+  --ice:#F4F7FB;
+  --mist:#93A1B5;
+  --line:rgba(147,161,181,.20);
+  --line-soft:rgba(147,161,181,.12);
+  --max:1180px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none !important}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  color:var(--ice);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--cyan);color:var(--black)}
+h1,h2,h3,.headline{font-family:'Archivo','Inter',sans-serif;text-transform:uppercase;line-height:1.08}
+h2{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:.02em}
+h3{font-size:19px;font-weight:800;letter-spacing:.05em}
+p{color:var(--mist)}
+a{color:var(--cyan)}
+img,svg{display:block}
+.wrap{width:min(var(--max),100% - 48px);margin-inline:auto}
+section{padding:clamp(72px,10vw,128px) 0;position:relative}
+.eyebrow{
+  font-family:'Space Grotesk',monospace;
+  font-size:13px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:18px;display:flex;align-items:center;gap:14px;
+}
+.eyebrow::before{content:"";width:34px;height:2px;background:var(--volt)}
+.lede{font-size:clamp(18px,2.2vw,21px);max-width:62ch;margin-top:20px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Archivo',sans-serif;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:14px;
+  padding:16px 30px;border-radius:999px;text-decoration:none;border:2px solid transparent;
+  transition:transform .18s ease,background .18s ease,color .18s ease,border-color .18s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-cyan{background:var(--cyan);color:var(--black)}
+.btn-cyan:hover{background:var(--volt)}
+.btn-ghost{background:transparent;color:var(--ice);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn-volt{background:var(--volt);color:var(--black)}
+.btn-volt:hover{background:var(--cyan)}
+.badge{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:'Space Grotesk',monospace;font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--volt);border:1px solid rgba(200,255,46,.4);border-radius:999px;padding:8px 16px;
+}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:var(--volt);animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+/* Header */
+header{
+  position:sticky;top:0;z-index:60;background:rgba(6,8,13,.96);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ice)}
+.brand svg{width:38px;height:38px}
+.brand-name{font-family:'Archivo',sans-serif;font-weight:800;font-size:19px;letter-spacing:.14em}
+.brand-name span{color:var(--cyan)}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{
+  color:var(--ice);text-decoration:none;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+}
+.nav-links a:hover{color:var(--cyan)}
+.nav-links .btn{padding:11px 22px}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);border-radius:10px;padding:9px 12px;cursor:pointer}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--ice);margin:5px 0}
+/* Hero */
+.hero{padding:clamp(64px,9vw,110px) 0 clamp(80px,10vw,130px);overflow:hidden}
+.hero-rings{position:absolute;right:-260px;top:-180px;width:760px;height:760px;opacity:.5;pointer-events:none}
+.hero-inner{position:relative;z-index:2;text-align:left}
+.hero-logo{width:min(600px,92%);height:auto;margin-bottom:38px}
+.hero h1{font-size:clamp(40px,6.4vw,76px);font-weight:900;letter-spacing:.01em;max-width:14ch}
+.hero h1 em{font-style:normal;color:var(--cyan)}
+.hero .lede{max-width:56ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:38px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:14px 34px;margin-top:52px;padding-top:28px;border-top:1px solid var(--line-soft)}
+.hero-meta div{font-family:'Space Grotesk',monospace}
+.hero-meta b{display:block;font-size:24px;color:var(--ice);font-weight:700}
+.hero-meta span{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--mist)}
+/* Journey */
+.journey-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:54px}
+.stage{
+  background:var(--navy);border:1px solid var(--line-soft);border-radius:18px;padding:28px 22px 30px;
+}
+.stage .num{font-family:'Space Grotesk',monospace;font-size:44px;font-weight:700;color:var(--cyan);line-height:1}
+.stage:nth-child(2) .num{color:var(--volt)}
+.stage:nth-child(3) .num{color:var(--cyan)}
+.stage:nth-child(4) .num{color:var(--volt)}
+.stage:nth-child(5) .num{color:var(--coral)}
+.stage h3{margin:16px 0 10px}
+.stage p{font-size:15px}
+/* Worlds */
+.worlds-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:54px}
+.world{
+  background:var(--navy);border:1px solid var(--line-soft);border-radius:20px;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.world-visual{
+  background:var(--navy-deep);aspect-ratio:16/9;position:relative;
+  display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line-soft);
+}
+.world-visual svg{width:62%;height:auto}
+.chip{
+  position:absolute;top:14px;left:14px;
+  font-family:'Space Grotesk',monospace;font-size:10.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--mist);border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:rgba(6,8,13,.55);
+}
+.world-body{padding:28px 28px 32px}
+.world-kicker{font-family:'Space Grotesk',monospace;font-size:12.5px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--volt);margin-bottom:10px}
+.world h3{font-size:24px;margin-bottom:10px}
+.world p{font-size:15.5px}
+.world.first{grid-column:span 2}
+.world.first .world-visual{aspect-ratio:21/9}
+.world.wide{grid-column:span 2}
+.world.wide .world-visual{aspect-ratio:21/9}
+/* Split sections */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,6vw,84px);align-items:center}
+.split-visual{
+  background:var(--navy);border:1px solid var(--line-soft);border-radius:22px;
+  padding:clamp(28px,4vw,48px);display:flex;align-items:center;justify-content:center;min-height:340px;position:relative;
+}
+.split-visual svg.mark{width:min(300px,70%);height:auto}
+.tick-list{list-style:none;margin-top:28px;display:grid;gap:16px}
+.tick-list li{display:flex;gap:14px;align-items:flex-start;color:var(--mist);font-size:16px}
+.tick-list li b{color:var(--ice);font-weight:600}
+.tick{
+  flex:0 0 auto;width:24px;height:24px;border-radius:50%;margin-top:2px;
+  border:2px solid var(--cyan);position:relative;
+}
+.tick::after{content:"";position:absolute;left:7px;top:3.5px;width:5px;height:10px;border:solid var(--volt);border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
+.note{
+  margin-top:28px;border-left:3px solid var(--volt);background:var(--navy);
+  padding:18px 22px;border-radius:0 14px 14px 0;font-size:15px;color:var(--mist);
+}
+.note b{color:var(--ice)}
+/* Arena band */
+.arena-band{
+  background:var(--navy);border:1px solid var(--line-soft);border-radius:24px;
+  padding:clamp(34px,5vw,60px);display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,54px);align-items:center;
+}
+.arena-band svg{width:120px;height:120px}
+/* Pricing */
+.price-group-label{
+  font-family:'Space Grotesk',monospace;font-size:13px;font-weight:600;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--mist);margin:52px 0 20px;
+}
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.price-grid.schools{grid-template-columns:repeat(3,1fr)}
+.plan{background:var(--navy);border:1px solid var(--line-soft);border-radius:18px;padding:30px 26px 32px;display:flex;flex-direction:column}
+.plan.featured{border-color:var(--cyan)}
+.plan .tier{font-family:'Archivo',sans-serif;font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:15px}
+.plan .amount{font-family:'Space Grotesk',monospace;font-size:40px;font-weight:700;color:var(--ice);margin:14px 0 2px}
+.plan .amount small{font-size:15px;color:var(--mist);font-weight:500}
+.plan .per{font-size:13px;color:var(--mist);margin-bottom:16px}
+.plan p{font-size:14.5px}
+.plan .tag{
+  align-self:flex-start;font-family:'Space Grotesk',monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--black);background:var(--volt);
+  border-radius:999px;padding:4px 11px;margin-bottom:16px;
+}
+/* Signup */
+.signup-panel{
+  background:var(--navy);border:1px solid var(--line-soft);border-radius:24px;
+  padding:clamp(30px,5vw,56px);display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,5vw,60px);
+}
+form{display:grid;gap:18px}
+.field label{display:block;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);margin-bottom:8px}
+.field label i{font-style:normal;color:var(--cyan);text-transform:none;letter-spacing:0;font-weight:500}
+.field input,.field select,.field textarea{
+  width:100%;background:var(--navy-deep);border:1px solid var(--line);border-radius:12px;
+  color:var(--ice);font-family:'Inter',sans-serif;font-size:16px;padding:14px 16px;
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--cyan);outline-offset:1px;border-color:transparent}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.hidden-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+form .btn{justify-self:start;border:none;cursor:pointer;font-size:15px}
+.form-fine{font-size:13.5px;color:var(--mist)}
+.success-panel{
+  border:1px solid rgba(200,255,46,.45);border-radius:18px;padding:30px;background:var(--navy-deep);
+}
+.success-panel h3{color:var(--volt);margin-bottom:10px}
+/* Footer */
+footer{border-top:1px solid var(--line-soft);padding:64px 0 40px;background:var(--navy-deep)}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:36px}
+.footer-grid svg{width:170px;height:auto}
+.footer h4{font-family:'Archivo',sans-serif;font-size:13px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--ice);margin-bottom:16px}
+.footer ul{list-style:none;display:grid;gap:10px}
+.footer a{color:var(--mist);text-decoration:none;font-size:15px}
+.footer a:hover{color:var(--cyan)}
+.footer p{font-size:14.5px;max-width:34ch}
+.footer-base{
+  margin-top:48px;padding-top:24px;border-top:1px solid var(--line-soft);
+  display:flex;flex-wrap:wrap;gap:12px 30px;justify-content:space-between;
+  font-size:13px;color:var(--mist);
+}
+/* Reveal (hidden state applies only when JS is running, so content is never lost without it) */
+html.js .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+html.js .reveal.in{opacity:1;transform:none}
+/* Responsive */
+@media (max-width:1020px){
+  .journey-grid{grid-template-columns:repeat(2,1fr)}
+  .price-grid{grid-template-columns:repeat(2,1fr)}
+  .price-grid.schools{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .nav-links{
+    display:none;position:absolute;top:100%;left:0;right:0;background:var(--black);
+    flex-direction:column;align-items:flex-start;gap:0;padding:10px 24px 22px;border-bottom:1px solid var(--line-soft);
+  }
+  .nav-links.open{display:flex}
+  .nav-links li{width:100%}
+  .nav-links a{display:block;padding:12px 0}
+  .nav-links .btn{margin-top:10px}
+  .nav-toggle{display:block}
+  header .wrap{position:relative}
+  .worlds-grid{grid-template-columns:1fr}
+  .world.first{grid-column:span 1}
+  .world.first .world-visual{aspect-ratio:16/9}
+  .world.wide{grid-column:span 1}
+  .world.wide .world-visual{aspect-ratio:16/9}
+  .split{grid-template-columns:1fr}
+  .signup-panel{grid-template-columns:1fr}
+  .arena-band{grid-template-columns:1fr}
+  .field-row{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .journey-grid{grid-template-columns:1fr}
+  .price-grid,.price-grid.schools{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-meta{gap:18px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  html.js .reveal{opacity:1;transform:none;transition:none}
+  .badge .dot{animation:none}
+  .btn:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="#top" aria-label="MOVEVERSE home">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="MoveVerse Orbit Mark symbol">
+          <title>MoveVerse Orbit Mark</title>
+          <ellipse cx="120" cy="120" rx="102" ry="40" fill="none" stroke="#00E5FF" stroke-width="14" transform="rotate(-22 120 120)"/>
+          <path d="M60 180 L60 60 L84 60 L120 116 L156 60 L180 60 L180 180 L156 180 L156 104 L120 156 L84 104 L84 180 Z" fill="#F4F7FB"/>
+          <circle cx="169" cy="67" r="13" fill="#C8FF2E"/>
+        </svg>
+        <span class="brand-name">MOVE<span>VERSE</span></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#worlds">Worlds</a></li>
+        <li><a href="#journey">Journey</a></li>
+        <li><a href="#coach">Coach</a></li>
+        <li><a href="#academy">Academy</a></li>
+        <li><a href="#arena">Arena</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a class="btn btn-cyan" href="#signup">Early Access</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-rings" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+    <ellipse cx="300" cy="300" rx="270" ry="108" fill="none" stroke="#00E5FF" stroke-width="1.5" opacity="0.35" transform="rotate(-22 300 300)"/>
+    <ellipse cx="300" cy="300" rx="205" ry="82" fill="none" stroke="#00E5FF" stroke-width="1.5" opacity="0.22" transform="rotate(-22 300 300)"/>
+    <ellipse cx="300" cy="300" rx="140" ry="56" fill="none" stroke="#93A1B5" stroke-width="1.5" opacity="0.18" transform="rotate(-22 300 300)"/>
+    <circle cx="452" cy="196" r="7" fill="#C8FF2E" opacity="0.8"/>
+    <circle cx="196" cy="392" r="4" fill="#00E5FF" opacity="0.6"/>
+  </svg>
+  <div class="wrap hero-inner">
+    <svg class="hero-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 240" role="img" aria-label="MoveVerse primary logo, horizontal lockup">
+      <title>MoveVerse primary logo</title>
+      <g>
+        <ellipse cx="120" cy="120" rx="102" ry="40" fill="none" stroke="#00E5FF" stroke-width="14" transform="rotate(-22 120 120)"/>
+        <path d="M60 180 L60 60 L84 60 L120 116 L156 60 L180 60 L180 180 L156 180 L156 104 L120 156 L84 104 L84 180 Z" fill="#F4F7FB"/>
+        <circle cx="169" cy="67" r="13" fill="#C8FF2E"/>
+      </g>
+      <text x="272" y="128" font-family="'Archivo Expanded','Archivo','Space Grotesk','Inter',sans-serif" font-size="68" font-weight="800" letter-spacing="6" fill="#F4F7FB">MOVE<tspan fill="#00E5FF">VERSE</tspan></text>
+      <text x="276" y="174" font-family="'Archivo','Space Grotesk','Inter',sans-serif" font-size="19" font-weight="600" letter-spacing="7" fill="#93A1B5">THE WORLD OF MOVEMENT</text>
+    </svg>
+    <p style="margin-bottom:26px"><span class="badge"><span class="dot"></span>Now in development</span></p>
+    <h1>Every world moves. <em>This one is yours.</em></h1>
+    <p class="lede">MOVEVERSE is one living world where fitness, dance, sports and play live together. Put on a headset and step into Worlds in Motion, a VR journey built for every age and every level, from PreK kids taking their first class to adults training for life.</p>
+    <div class="hero-cta">
+      <a class="btn btn-cyan" href="#signup">Join Early Access</a>
+      <a class="btn btn-ghost" href="#worlds">Explore the Worlds</a>
+    </div>
+    <div class="hero-meta">
+      <div><b>8</b><span>Worlds to explore</span></div>
+      <div><b>100</b><span>Levels to climb</span></div>
+      <div><b>1</b><span>Account everywhere</span></div>
+      <div><b>All</b><span>Ages and levels</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORLDS IN MOTION OVERVIEW AND JOURNEY -->
+<section id="journey" style="padding-top:20px">
+  <div class="wrap">
+    <p class="eyebrow reveal">Worlds in Motion</p>
+    <h2 class="reveal">One world. One journey.</h2>
+    <p class="lede reveal">Worlds in Motion is the flagship game of MOVEVERSE. Eight worlds connect to one hub, one coach and one progression record. You arrive as a new mover and rise through missions, training and challenges until new worlds open. This is the journey.</p>
+    <div class="journey-grid">
+      <article class="stage reveal">
+        <div class="num">01</div>
+        <h3>Arrive</h3>
+        <p>Step into the hub, meet your coach, and learn how you move here. Standing or seated, at your pace.</p>
+      </article>
+      <article class="stage reveal">
+        <div class="num">02</div>
+        <h3>Explore</h3>
+        <p>Take on missions across Adventure Island, from first paths and river crossings to hidden places.</p>
+      </article>
+      <article class="stage reveal">
+        <div class="num">03</div>
+        <h3>Train</h3>
+        <p>Build real skill with the MOVE AI COACH. Technique explained, movement demonstrated, difficulty adapted to you.</p>
+      </article>
+      <article class="stage reveal">
+        <div class="num">04</div>
+        <h3>Challenge</h3>
+        <p>Obstacle experiences and replayable challenges. Beat the course, then come back and beat your best.</p>
+      </article>
+      <article class="stage reveal">
+        <div class="num">05</div>
+        <h3>Rise</h3>
+        <p>Earn achievements and rewards, climb through 100 levels, and open the road to the next world.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- THE EIGHT WORLDS -->
+<section id="worlds" style="padding-top:30px">
+  <div class="wrap">
+    <p class="eyebrow reveal">The Eight Worlds</p>
+    <h2 class="reveal">Choose your world</h2>
+    <p class="lede reveal">Every world trains a different kind of movement, and every world adds to the same record. Adventure Island comes first. The rest open as the verse grows. Visuals below are concept art, drawn to show the idea of each world while the game is built.</p>
+    <div class="worlds-grid">
+
+      <article class="world first reveal">
+        <div class="world-visual">
+          <span class="chip">Concept visual</span>
+          <svg viewBox="0 0 200 120" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="158" cy="30" r="11" stroke="#C8FF2E" stroke-width="3"/>
+            <path d="M8 96 L58 40 L86 70 L112 34 L150 78 L168 60 L192 96" stroke="#00E5FF" stroke-width="3"/>
+            <path d="M8 106 C50 96 84 112 122 104 C150 98 172 106 192 102" stroke="#93A1B5" stroke-width="3"/>
+            <path d="M58 40 L58 26" stroke="#F4F7FB" stroke-width="3"/>
+            <path d="M58 26 L74 31 L58 37" stroke="#FF5C39" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="world-body">
+          <p class="world-kicker">World One · Explore · Climb · Discover</p>
+          <h3>Adventure Island</h3>
+          <p>A jungle island of paths, rivers and high places. Cross the bridge, climb to the lookout, follow the treasure signs and complete five missions from first step to final discovery. Obstacle courses, hidden treasure, achievements and rewards make the island a complete journey, and the front door to everything after it.</p>
+        </div>
+      </article>
+
+      <article class="world reveal">
+        <div class="world-visual">
+          <span class="chip">Concept visual</span>
+          <svg viewBox="0 0 200 120" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 26 L84 26 M26 46 L110 46 M10 66 L70 66" stroke="#00E5FF" stroke-width="3"/>
+            <path d="M100 88 L186 88 M126 104 L196 104" stroke="#93A1B5" stroke-width="3"/>
+            <path d="M150 14 L157 42 L186 49 L157 56 L150 84 L143 56 L114 49 L143 42 Z" stroke="#C8FF2E" stroke-width="3"/>
+            <circle cx="52" cy="94" r="10" stroke="#F4F7FB" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="world-body">
+          <p class="world-kicker">Agility · Balance · Reaction</p>
+          <h3>Ninja District</h3>
+          <p>Rooftops, beams and light trails in a night district built for quick feet. Move quiet, land clean and react fast as the courses raise the speed and narrow the margins.</p>
+        </div>
+      </article>
+
+      <article class="world reveal">
+        <div class="world-visual">
+          <span class="chip">Concept visual</span>
+          <svg viewBox="0 0 200 120" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="86" cy="60" r="36" stroke="#00E5FF" stroke-width="3"/>
+            <path d="M52 44 C74 58 98 62 120 50 M56 84 C76 66 100 64 118 76 M86 24 C76 48 76 72 86 96" stroke="#93A1B5" stroke-width="3"/>
+            <circle cx="152" cy="34" r="12" stroke="#C8FF2E" stroke-width="3"/>
+            <circle cx="160" cy="88" r="8" stroke="#F4F7FB" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="world-body">
+          <p class="world-kicker">Every sport · One city</p>
+          <h3>Sports City</h3>
+          <p>Basketball, soccer, baseball, football, tennis and volleyball, taught as movement first and played as games. Learn the footwork, the throw, the strike and the serve, then put them together on the field.</p>
+        </div>
+      </article>
+
+      <article class="world reveal">
+        <div class="world-visual">
+          <span class="chip">Concept visual</span>
+          <svg viewBox="0 0 200 120" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M100 14 L152 30 V62 C152 86 130 100 100 108 C70 100 48 86 48 62 V30 Z" stroke="#00E5FF" stroke-width="3"/>
+            <path d="M74 58 L100 80 L126 46" stroke="#C8FF2E" stroke-width="3"/>
+            <path d="M100 14 V108" stroke="#93A1B5" stroke-width="2" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="world-body">
+          <p class="world-kicker">Discipline · Technique · Respect</p>
+          <h3>Combat Island</h3>
+          <p>Martial arts movement taught the right way. Stance, footwork, balance and control, with respect for the art and for the person across from you built into every lesson.</p>
+        </div>
+      </article>
+
+      <article class="world reveal">
+        <div class="world-visual">
+          <span class="chip">Concept visual</span>
+          <svg viewBox="0 0 200 120" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 40 C34 24 58 56 84 40 C110 24 134 56 160 40 C174 31 184 34 192 40" stroke="#00E5FF" stroke-width="3"/>
+            <path d="M8 66 C34 50 58 82 84 66 C110 50 134 82 160 66 C174 57 184 60 192 66" stroke="#93A1B5" stroke-width="3"/>
+            <path d="M8 92 C34 76 58 108 84 92 C110 76 134 108 160 92 C174 83 184 86 192 92" stroke="#C8FF2E" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="world-body">
+          <p class="world-kicker">Swim technique · Water challenges</p>
+          <h3>Water Quest</h3>
+          <p>Learn the water stroke by stroke. Swim technique, breathing rhythm and water challenges that build real confidence in and around the water, one skill at a time.</p>
+        </div>
+      </article>
+
+      <article class="world reveal">
+        <div class="world-visual">
+          <span class="chip">Concept visual</span>
+          <svg viewBox="0 0 200 120" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 104 V52 H52 V104 M64 104 V30 H100 V104 M112 104 V62 H140 V104 M152 104 V44 H178 V104" stroke="#00E5FF" stroke-width="3"/>
+            <path d="M74 46 H90 M74 62 H90 M74 78 H90 M160 60 H170 M160 76 H170" stroke="#C8FF2E" stroke-width="3"/>
+            <path d="M10 104 H192" stroke="#93A1B5" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="world-body">
+          <p class="world-kicker">Strength · Endurance · Conditioning</p>
+          <h3>Fitness Metropolis</h3>
+          <p>A city that trains you. Towers to climb, districts to cross and conditioning built into every route, so getting stronger is simply how you travel.</p>
+        </div>
+      </article>
+
+      <article class="world reveal">
+        <div class="world-visual">
+          <span class="chip">Concept visual</span>
+          <svg viewBox="0 0 200 120" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="100" cy="60" r="14" stroke="#C8FF2E" stroke-width="3"/>
+            <circle cx="100" cy="60" r="28" stroke="#00E5FF" stroke-width="3" opacity="0.75"/>
+            <circle cx="100" cy="60" r="43" stroke="#93A1B5" stroke-width="3" opacity="0.45"/>
+            <path d="M100 96 C84 84 84 70 100 60 C116 70 116 84 100 96 Z" stroke="#F4F7FB" stroke-width="2.5"/>
+          </svg>
+        </div>
+        <div class="world-body">
+          <p class="world-kicker">Yoga · Breathing · Mobility · Mindfulness</p>
+          <h3>Wellness Retreat</h3>
+          <p>The quiet world that makes every other world possible. Yoga, breathing, mobility and mindfulness sessions that restore the body and settle the mind.</p>
+        </div>
+      </article>
+
+      <article class="world wide reveal">
+        <div class="world-visual">
+          <span class="chip">Concept visual</span>
+          <svg viewBox="0 0 200 120" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="100" cy="60" r="40" stroke="#00E5FF" stroke-width="3"/>
+            <ellipse cx="100" cy="60" rx="17" ry="40" stroke="#93A1B5" stroke-width="3"/>
+            <path d="M62 46 H138 M62 74 H138" stroke="#93A1B5" stroke-width="3"/>
+            <ellipse cx="100" cy="60" rx="52" ry="15" stroke="#C8FF2E" stroke-width="2.5" transform="rotate(-22 100 60)"/>
+          </svg>
+        </div>
+        <div class="world-body">
+          <p class="world-kicker">Play the world</p>
+          <h3>Global Playgrounds</h3>
+          <p>Playground games from cultures all over the world, played the way they have been played for generations. Every visit is a new country, a new game and a new way to move.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- MOVE AI COACH -->
+<section id="coach" style="padding-top:30px">
+  <div class="wrap split">
+    <div class="reveal">
+      <p class="eyebrow">Move AI Coach</p>
+      <h2>A coach inside the world</h2>
+      <p class="lede">The MOVE AI COACH lives inside Worlds in Motion. It teaches the way a great coach teaches: show the movement, explain it plainly, watch the attempt, and adjust what comes next.</p>
+      <ul class="tick-list">
+        <li><span class="tick"></span><span><b>Explains technique</b> in plain language, one cue at a time, so a five year old and an adult athlete both get it.</span></li>
+        <li><span class="tick"></span><span><b>Demonstrates movement</b> in front of you, so you can follow along and mirror what you see.</span></li>
+        <li><span class="tick"></span><span><b>Adapts difficulty</b> to your level. Courses and challenges scale as your skill grows.</span></li>
+        <li><span class="tick"></span><span><b>Encourages with honesty.</b> Credit for real progress, clear guidance when something needs work.</span></li>
+        <li><span class="tick"></span><span><b>Tracks progress</b> across every world, so your record shows how far you have come.</span></li>
+      </ul>
+      <div class="note"><b>Honest limits.</b> The coach recognises only what headset sensors can reliably verify, and it teaches movement only. It gives no medical diagnosis and no medical advice.</div>
+    </div>
+    <div class="split-visual reveal" aria-hidden="true">
+      <svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="MoveVerse Orbit Mark symbol on Verse Black, safe for circular avatar crop">
+        <title>MoveVerse Orbit Mark on dark</title>
+        <rect x="0" y="0" width="240" height="240" fill="#06080D"/>
+        <g transform="translate(24 24) scale(0.8)">
+          <ellipse cx="120" cy="120" rx="102" ry="40" fill="none" stroke="#00E5FF" stroke-width="14" transform="rotate(-22 120 120)"/>
+          <path d="M60 180 L60 60 L84 60 L120 116 L156 60 L180 60 L180 180 L156 180 L156 104 L120 156 L84 104 L84 180 Z" fill="#F4F7FB"/>
+          <circle cx="169" cy="67" r="13" fill="#C8FF2E"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMY -->
+<section id="academy" style="padding-top:30px">
+  <div class="wrap split">
+    <div class="split-visual reveal" aria-hidden="true">
+      <svg viewBox="0 0 200 160" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width:min(320px,76%);height:auto">
+        <rect x="18" y="18" width="164" height="124" rx="10" stroke="#00E5FF" stroke-width="3"/>
+        <path d="M18 52 H182" stroke="#93A1B5" stroke-width="3"/>
+        <circle cx="34" cy="35" r="4" fill="#FF5C39"/>
+        <circle cx="52" cy="35" r="4" fill="#C8FF2E"/>
+        <path d="M38 118 V88 M74 118 V72 M110 118 V94 M146 118 V64" stroke="#00E5FF" stroke-width="6"/>
+        <path d="M34 128 H166" stroke="#93A1B5" stroke-width="3"/>
+      </svg>
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">MoveVerse Academy</p>
+      <h2>Built for real PE</h2>
+      <p class="lede">MOVEVERSE Academy brings the worlds into physical education. Lessons are aligned to standards and built for real class schedules, with the teacher in control from the first minute.</p>
+      <ul class="tick-list">
+        <li><span class="tick"></span><span><b>Standards aligned lessons</b> drawn from the worlds, ready to run in a normal class period.</span></li>
+        <li><span class="tick"></span><span><b>Teacher dashboard</b> with class progress at a glance, designed with working PE teachers in mind.</span></li>
+        <li><span class="tick"></span><span><b>Student progress records</b> that follow each participant across sessions and worlds.</span></li>
+        <li><span class="tick"></span><span><b>Printable reports</b> for the records schools actually keep.</span></li>
+      </ul>
+      <div class="note"><b>Safety first, on paper and in product.</b> Academy privacy controls are part of the design from the start. Accounts for children arrive only after child safety and legal review is complete.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ARENA -->
+<section id="arena" style="padding-top:30px">
+  <div class="wrap">
+    <div class="arena-band reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="MoveVerse Orbit Mark, one color white version" aria-hidden="true">
+        <title>MoveVerse Orbit Mark, one color white</title>
+        <ellipse cx="120" cy="120" rx="102" ry="40" fill="none" stroke="#F4F7FB" stroke-width="14" transform="rotate(-22 120 120)"/>
+        <path d="M60 180 L60 60 L84 60 L120 116 L156 60 L180 60 L180 180 L156 180 L156 104 L120 156 L84 104 L84 180 Z" fill="#F4F7FB"/>
+        <circle cx="169" cy="67" r="13" fill="#F4F7FB"/>
+      </svg>
+      <div>
+        <p class="eyebrow">MoveVerse Arena</p>
+        <h2 style="font-size:clamp(26px,3.6vw,40px)">Play together, later</h2>
+        <p style="margin-top:14px;max-width:62ch">Arena is the shared world of MOVEVERSE: safe, moderated multiplayer where movers meet, team up and challenge each other. It is a later phase of the platform. Arena opens only after child safety and legal review is complete, and no date is promised. When it opens, it opens safe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONE ACCOUNT -->
+<section id="account" style="padding-top:30px">
+  <div class="wrap split">
+    <div class="reveal">
+      <p class="eyebrow">One Account</p>
+      <h2>The site and the game are one platform</h2>
+      <p class="lede">Your MOVEVERSE identity is the same on this website and inside the headset. What you earn in the game is part of who you are everywhere in the verse.</p>
+      <ul class="tick-list">
+        <li><span class="tick"></span><span><b>One identity.</b> Sign in here, step into the headset, and the verse knows you.</span></li>
+        <li><span class="tick"></span><span><b>One progression record.</b> Levels, achievements, rewards and personal records follow you across worlds and devices.</span></li>
+        <li><span class="tick"></span><span><b>Views for grown ups.</b> Parents and teachers get clear views of the progress they are responsible for.</span></li>
+      </ul>
+    </div>
+    <div class="split-visual reveal" aria-hidden="true">
+      <svg viewBox="0 0 200 160" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width:min(320px,76%);height:auto">
+        <circle cx="100" cy="58" r="24" stroke="#00E5FF" stroke-width="3"/>
+        <path d="M52 138 C58 106 78 96 100 96 C122 96 142 106 148 138" stroke="#F4F7FB" stroke-width="3"/>
+        <ellipse cx="100" cy="58" rx="44" ry="17" stroke="#C8FF2E" stroke-width="2.5" transform="rotate(-22 100 58)"/>
+        <path d="M30 138 H170" stroke="#93A1B5" stroke-width="3"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="padding-top:30px">
+  <div class="wrap">
+    <p class="eyebrow reveal">Pricing</p>
+    <h2 class="reveal">Proposed launch pricing</h2>
+    <p class="lede reveal">Every price below is proposed. Billing is not live, nothing is charged today, and final pricing is set only after research with the movers, families and schools who will use it.</p>
+
+    <p class="price-group-label reveal">For players and families</p>
+    <div class="price-grid">
+      <article class="plan reveal">
+        <p class="tier">Explorer</p>
+        <p class="amount">$0</p>
+        <p class="per">Free</p>
+        <p>Start moving. The hub and the opening of Adventure Island, with your own profile and progression record.</p>
+      </article>
+      <article class="plan featured reveal">
+        <span class="tag">Proposed</span>
+        <p class="tier">Plus</p>
+        <p class="amount">$9.99<small> /mo</small></p>
+        <p class="per">Per month</p>
+        <p>The full journey. Every open world, full coach guidance and the complete progression record.</p>
+      </article>
+      <article class="plan reveal">
+        <p class="tier">Premium</p>
+        <p class="amount">$19.99<small> /mo</small></p>
+        <p class="per">Per month</p>
+        <p>Everything in Plus, with new worlds on release and the deepest level of coach support. An annual option at $179.99 per year is also proposed.</p>
+      </article>
+      <article class="plan reveal">
+        <p class="tier">Family</p>
+        <p class="amount">$24.99<small> /mo</small></p>
+        <p class="per">Per month</p>
+        <p>One plan for the household, with an individual profile and progression record for each mover.</p>
+      </article>
+    </div>
+
+    <p class="price-group-label reveal">For schools and educators</p>
+    <div class="price-grid schools">
+      <article class="plan reveal">
+        <p class="tier">Educator</p>
+        <p class="amount">$19<small> /mo</small></p>
+        <p class="per">Per month</p>
+        <p>For one teacher. Class ready sessions, a teacher view of progress and printable reports.</p>
+      </article>
+      <article class="plan reveal">
+        <p class="tier">Small School</p>
+        <p class="amount">$99<small> /mo</small></p>
+        <p class="per">Per month</p>
+        <p>For a school getting started. Multiple classes, teacher accounts and progress across the school.</p>
+      </article>
+      <article class="plan reveal">
+        <p class="tier">School Plus</p>
+        <p class="amount">$199<small> /mo</small></p>
+        <p class="per">Per month</p>
+        <p>For larger programs. More classes, more teachers and fuller reporting across the whole program.</p>
+      </article>
+    </div>
+    <p class="reveal" style="margin-top:22px;font-size:15px">District pricing is custom, set with each district after a conversation about size and needs.</p>
+  </div>
+</section>
+
+<!-- SIGNUP -->
+<section id="signup" style="padding-top:30px">
+  <div class="wrap">
+    <div class="signup-panel reveal">
+      <div>
+        <p class="eyebrow">Early Access</p>
+        <h2 style="font-size:clamp(28px,4vw,44px)">Get in first</h2>
+        <p style="margin-top:18px">Early access opens in waves as worlds are ready. Tell us who you are and we will write to you when your wave opens.</p>
+        <ul class="tick-list">
+          <li><span class="tick"></span><span><b>Players</b> who want in from the first wave.</span></li>
+          <li><span class="tick"></span><span><b>Beta testers</b> ready to play early builds and report what they find.</span></li>
+          <li><span class="tick"></span><span><b>Teachers and schools</b> planning movement and PE programs.</span></li>
+          <li><span class="tick"></span><span><b>Parents</b> who want MOVEVERSE ready for their family.</span></li>
+        </ul>
+        <p class="form-fine" style="margin-top:22px">We write only about MOVEVERSE early access and launch. No spam, ever.</p>
+      </div>
+      <div>
+        <div class="success-panel" id="successPanel" hidden>
+          <h3>You are on the list</h3>
+          <p>Thank you. Your place in the early access line is saved. We will write to the email you gave us when your wave opens.</p>
+          <p style="margin-top:14px"><a href="#worlds">Keep exploring the worlds</a></p>
+        </div>
+        <form name="moveverse-signup" id="moveverse-signup" method="POST" action="/index.html#success" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="moveverse-signup">
+          <p class="hidden-field" aria-hidden="true">
+            <label>Do not fill this in if you are human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+          </p>
+          <div class="field">
+            <label for="f-type">I am signing up as</label>
+            <select id="f-type" name="signup_type" required>
+              <option value="Player Early Access">Player Early Access</option>
+              <option value="Beta Tester">Beta Tester</option>
+              <option value="Teacher or School">Teacher or School</option>
+              <option value="Parent">Parent</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-first">First name</label>
+              <input id="f-first" name="first_name" type="text" autocomplete="given-name" required>
+            </div>
+            <div class="field">
+              <label for="f-last">Last name</label>
+              <input id="f-last" name="last_name" type="text" autocomplete="family-name" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="f-org">School or organization <i>(optional)</i></label>
+            <input id="f-org" name="organization" type="text" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="f-msg">Anything we should know <i>(optional)</i></label>
+            <textarea id="f-msg" name="message" rows="4"></textarea>
+          </div>
+          <button class="btn btn-cyan" type="submit">Request Early Access</button>
+        </form>
+        <!-- Static replica for form detection on static hosts. The visible form above is plain static HTML; this hidden copy keeps every field name present in the served file. -->
+        <form name="moveverse-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true">
+          <input type="hidden" name="form-name" value="moveverse-signup">
+          <input type="text" name="signup_type">
+          <input type="text" name="first_name">
+          <input type="text" name="last_name">
+          <input type="email" name="email">
+          <input type="text" name="organization">
+          <textarea name="message"></textarea>
+          <input type="text" name="bot-field">
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 400" role="img" aria-label="MoveVerse stacked logo, symbol above wordmark">
+          <title>MoveVerse stacked logo</title>
+          <g transform="translate(140 10)">
+            <ellipse cx="120" cy="120" rx="102" ry="40" fill="none" stroke="#00E5FF" stroke-width="14" transform="rotate(-22 120 120)"/>
+            <path d="M60 180 L60 60 L84 60 L120 116 L156 60 L180 60 L180 180 L156 180 L156 104 L120 156 L84 104 L84 180 Z" fill="#F4F7FB"/>
+            <circle cx="169" cy="67" r="13" fill="#C8FF2E"/>
+          </g>
+          <text x="260" y="322" text-anchor="middle" font-family="'Archivo Expanded','Archivo','Space Grotesk','Inter',sans-serif" font-size="54" font-weight="800" letter-spacing="5" fill="#F4F7FB">MOVE<tspan fill="#00E5FF">VERSE</tspan></text>
+          <text x="260" y="360" text-anchor="middle" font-family="'Archivo','Space Grotesk','Inter',sans-serif" font-size="15" font-weight="600" letter-spacing="6" fill="#93A1B5">THE WORLD OF MOVEMENT</text>
+        </svg>
+        <p style="margin-top:20px">The World of Movement. Fitness, dance, sports and play in one world, for every age and every level.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#worlds">The Eight Worlds</a></li>
+          <li><a href="#journey">The Journey</a></li>
+          <li><a href="#coach">Move AI Coach</a></li>
+          <li><a href="#academy">Academy</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/moveversefit" target="_blank" rel="noopener">Instagram @MoveVerseFit</a></li>
+          <li><a href="#signup">Early Access Form</a></li>
+          <li><a href="#arena">Arena Updates</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© <span id="yr">2026</span> MOVEVERSE. All rights reserved.</span>
+      <span>Worlds in Motion is in development. Train. Move. Belong.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  if (toggle && links) {
+    toggle.addEventListener('click', function(){
+      var open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.addEventListener('click', function(e){
+      if (e.target.tagName === 'A') {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+  var yr = document.getElementById('yr');
+  if (yr) { yr.textContent = new Date().getFullYear(); }
+  var successPanel = document.getElementById('successPanel');
+  var form = document.getElementById('moveverse-signup');
+  var showSuccess = window.location.hash === '#success' ||
+    window.location.search.indexOf('signup=success') !== -1;
+  if (showSuccess && successPanel && form) {
+    form.hidden = true;
+    successPanel.hidden = false;
+    var target = document.getElementById('signup');
+    if (target) { target.scrollIntoView(); }
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+    window.addEventListener('load', function(){
+      setTimeout(function(){
+        document.querySelectorAll('.reveal:not(.in)').forEach(function(el){
+          if (el.getBoundingClientRect().top < window.innerHeight) { el.classList.add('in'); }
+        });
+      }, 1200);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
